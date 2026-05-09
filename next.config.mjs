@@ -6,11 +6,16 @@
 const repoName = process.env.REPO_NAME ?? ''
 const isSubdir = repoName && !repoName.endsWith('.github.io')
 
+const basePath = isSubdir ? `/${repoName}` : ''
+
 const nextConfig = {
   output: 'export',
-  basePath:    isSubdir ? `/${repoName}` : '',
-  assetPrefix: isSubdir ? `/${repoName}/` : '',
+  basePath,
+  assetPrefix: basePath,
   images: { unoptimized: true },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 }
 
 export default nextConfig

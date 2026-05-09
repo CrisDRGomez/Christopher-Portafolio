@@ -1,19 +1,20 @@
 'use client'
-
+ 
 import { useLang } from '@/context/LangContext'
 import { t } from '@/lib/translations'
 import { Reveal } from '@/components/ui/Reveal'
-
+import { imgPath } from '@/lib/utils'
+ 
 export function Projects() {
   const { l } = useLang()
-
+ 
   return (
     <section id="projects" className="section projects">
       <div className="section__container">
         <Reveal as="header" className=" section__header">
           <h2 className="section__title">{l(t.projects.title)}</h2>
         </Reveal>
-
+ 
         <div className="projects__grid">
           {t.projects.items.map((project, idx) => (
             <Reveal
@@ -25,28 +26,28 @@ export function Projects() {
               <div className="project-card__image-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={project.image}
+                  src={imgPath(project.image)}
                   alt={project.alt}
                   className="project-card__image"
                   loading="lazy"
                 />
               </div>
-
+ 
               <div className="project-card__body">
                 <div className="project-card__meta">
                   <span className="project-card__date">{l(project.date)}</span>
                   <span className="project-card__type">{l(project.type)}</span>
                 </div>
-
+ 
                 <h3 className="project-card__name">{project.name}</h3>
                 <p className="project-card__desc">{l(project.desc)}</p>
-
+ 
                 <div className="project-card__tech">
                   {project.tech.map((iconClass, ti) => (
                     <i key={ti} className={iconClass} title={project.techTitles[ti]} />
                   ))}
                 </div>
-
+ 
                 <a
                   href={project.link}
                   target="_blank"
